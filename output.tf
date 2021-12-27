@@ -46,8 +46,11 @@ ID_TOKEN=$(
 )
 curl --header "Authorization: Bearer $ID_TOKEN"  ${local.exports.target-url}/anything
 curl --header "Proxy-Authorization: Bearer $ID_TOKEN"  ${local.exports.target-url}/anything
+
 curl --user username:password --header "Proxy-Authorization: Bearer $ID_TOKEN"  ${local.exports.target-url}/anything
-curl --header "Authorization: Bearer $(gcloud auth print-identity-token) \
+
+# command with issue-207477241
+curl --header "Authorization: Bearer $(gcloud auth print-identity-token)" \
      --header "Proxy-Authorization: Bearer $ID_TOKEN"  ${local.exports.target-url}/anything
 EOF
 }
